@@ -1,7 +1,22 @@
 @import "tailwindcss";
 
+.home-bg {
+  background-size: auto 45%;
+}
+
+@media (min-width: 768px) {
+  .home-bg {
+    background-size: 60%;
+  }
+}
+
 @theme {
   --color-yellow: #FFC637;
+  --color-yellow-text: #FDC435;
+  --color-grey: #828282;
   --font-comfortaa: 'Comfortaa', cursive;
   --font-raleway: 'Raleway', sans-serif;
+  --font-nunito:'Nunito', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+  --font-roboto: 'Roboto', sans-serif;
 }
