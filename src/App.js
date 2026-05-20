@@ -1,9 +1,10 @@
-
-import './App.css';
+import Header from './components/Header';
 
 function App() {
+    const element = ["About", "Projects", "Contacts"];
   return (
-    <div className="App">
+    <div>
+      <Header elements={element} />
     </div>
   );
 }
