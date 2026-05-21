@@ -9,22 +9,21 @@ const borderMap = {
   black: 'border-2 border-black',
 };
 
-function Button({ label, onClick, href, color = 'yellow', border = 'none' }) {
+function Button({ label, href, color = 'yellow', border = 'none' }) {
   const classes = `font-roboto font-semibold px-6 py-3 rounded-full hover:opacity-90 transition-opacity w-30 text-center shadow-[0_4px_0px_rgba(0,0,0,0.15)] ${colorMap[color] ?? colorMap.yellow} ${borderMap[border] ?? borderMap.none}`;
 
-  if (href) {
-    return (
-      <a href={href} target="_blank" rel="noreferrer" className={classes}>
-        {label}
-      </a>
-    );
-  }
+  const isExternal = href?.startsWith('http');
 
   return (
-    <button onClick={onClick} className={classes}>
+    <a
+      href={href}
+      target={isExternal ? '_blank' : undefined}
+      className={classes}
+    >
       {label}
-    </button>
+    </a>
   );
 }
+
 
 export default Button;

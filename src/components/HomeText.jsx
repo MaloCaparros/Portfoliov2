@@ -7,13 +7,13 @@ function HomeText({ work, name }) {
       <h1 className="font-poppins font-bold text-4xl md:text-5xl text-center md:text-start lg:text-6xl md:w-2/5">
           Hello, my name is {name}
       </h1>
-      <p className="font-nunito text-grey text-center md:text-2xl px-3 md:w-1/2 md:text-start md:px-0">
+      <p className="font-nunito text-grey text-center md:text-2xl px-3 md:w-2/5 md:text-start md:px-0">
           Étudiant en 1 ère année d'école d'ingénieur à l'EFREI de Bordeaux, en alternance chez Alveus en tant que Software Engineer.
       </p>
       <div className="px-3 flex justify-center gap-2 md:w-1/2 md:justify-start md:px-0">
         <Button
             label="Projets"
-            href=""
+            href="#projects"
             color="yellow"
             border="none"
         />

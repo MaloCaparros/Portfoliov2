@@ -3,17 +3,18 @@ import { useState } from 'react';
 function Header({ elements }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const listElements = elements.map((element) => (
-    <li key={element}>
-      <a
-        href={`#${element}`}
-        className="font-raleway text-lg"
-        onClick={() => setIsOpen(false)}
-      >
-        {element}
-      </a>
-    </li>
-  ));
+  const renderLinks = (className) =>
+    elements.map((element) => (
+      <li key={element.label}>
+        <a
+          href={element.path}
+          className={className}
+          onClick={() => setIsOpen(false)}
+        >
+          {element.label}
+        </a>
+      </li>
+    ));
 
   return (
     <header className="fixed top-0 w-full z-50 ">
@@ -21,7 +22,7 @@ function Header({ elements }) {
         <span className="font-comfortaa text-lg">Malo Caparros</span>
 
         <ul className="hidden md:flex gap-8 text-sm font-medium text-gray-600">
-          {listElements}
+          {renderLinks("font-raleway text-lg")}
         </ul>
 
         <button
@@ -35,7 +36,7 @@ function Header({ elements }) {
       </nav>
 
       <ul className={`md:hidden fixed inset-0 flex flex-col items-center justify-center gap-10 bg-white font-raleway text-2xl font-medium text-gray-600 transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
-        {listElements}
+        {renderLinks("font-raleway text-2xl")}
       </ul>
     </header>
   );
