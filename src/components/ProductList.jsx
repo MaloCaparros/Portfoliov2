@@ -36,8 +36,8 @@ function ProductList() {
         <span className="w-20 h-1 bg-yellow"></span>
       </div>
       <div className="grid grid-cols-1 gap-8 md:gap-6 w-full md:max-w-[50vw]">
-        {products.map((product) => (
-          <Product key={product.name} {...product} />
+        {products.map((product, index) => (
+          <Product key={product.name} {...product} reversed={index % 2 !== 0} />
         ))}
       </div>
     </section>

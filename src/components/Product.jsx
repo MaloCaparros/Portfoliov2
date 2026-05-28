@@ -1,8 +1,8 @@
 import Button from "./Button.jsx";
 
-function Product({ name, link, description, image }) {
+function Product({ name, link, description, image, reversed }) {
   return (
-    <div className="flex flex-col md:flex-row rounded-2xl overflow-hidden bg-white md:h-[24rem]">
+    <div className={`flex flex-col ${reversed ? 'md:flex-row-reverse' : 'md:flex-row'} rounded-2xl overflow-hidden bg-white md:h-[24rem] shadow-md`}>
       <div className="flex flex-col justify-center items-center p-6 flex-1 md:items-start">
         <h3 className="text-2xl font-playFaire font-bold">{name}</h3>
         <p className="text-grey font-nunito text-sm py-4 text-center md:text-start">{description}</p>
