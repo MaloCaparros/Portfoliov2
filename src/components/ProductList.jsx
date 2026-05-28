@@ -32,10 +32,10 @@ function ProductList() {
   return (
     <section id="projects" className="min-h-screen flex flex-col items-center justify-center px-6 gap-10 pt-9">
       <div className="flex flex-col w-full items-center gap-5 ">
-        <h2 className="font-playFaire font-bold text-3xl">Projets</h2>
+        <h2 className="font-playFaire font-bold text-3xl md:text-4xl">Projets</h2>
         <span className="w-20 h-1 bg-yellow"></span>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
+      <div className="grid grid-cols-1 gap-8 md:gap-6 w-full md:max-w-[50vw]">
         {products.map((product) => (
           <Product key={product.name} {...product} />
         ))}
