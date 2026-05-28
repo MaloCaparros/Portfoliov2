@@ -1,6 +1,7 @@
 import Header from './components/Header';
 import Home from './components/Home';
 import ProductList from './components/ProductList';
+import Contact from './components/Contact';
 
 const navElements = [
   { label: "About", path: "#about" },
@@ -14,6 +15,7 @@ function App() {
       <Header elements={navElements} />
       <Home />
       <ProductList />
+      <Contact />
     </main>
   );
 }
