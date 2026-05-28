@@ -14,9 +14,11 @@
   --color-yellow: #FFC637;
   --color-yellow-text: #FDC435;
   --color-grey: #828282;
+  --color-light-grey: #F9FAFF;
   --font-comfortaa: 'Comfortaa', cursive;
   --font-raleway: 'Raleway', sans-serif;
   --font-nunito:'Nunito', sans-serif;
   --font-poppins: 'Poppins', sans-serif;
   --font-roboto: 'Roboto', sans-serif;
+  --font-playFaire: 'Playfair Display', serif;
 }

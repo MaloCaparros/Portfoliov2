@@ -10,7 +10,7 @@ const borderMap = {
 };
 
 function Button({ label, href, color = 'yellow', border = 'none' }) {
-  const classes = `font-roboto font-semibold px-6 py-3 rounded-full hover:opacity-90 transition-opacity w-30 text-center shadow-[0_4px_0px_rgba(0,0,0,0.15)] ${colorMap[color] ?? colorMap.yellow} ${borderMap[border] ?? borderMap.none}`;
+  const classes = `font-roboto font-semibold px-6 py-3 rounded-full hover:opacity-90 transition-opacity min-w-30 text-center shadow-[0_4px_0px_rgba(0,0,0,0.15)] ${colorMap[color] ?? colorMap.yellow} ${borderMap[border] ?? borderMap.none}`;
 
   const isExternal = href?.startsWith('http');
 

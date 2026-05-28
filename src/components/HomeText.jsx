@@ -4,7 +4,7 @@ function HomeText({ work, name }) {
   return (
     <div className="flex flex-col justify-center gap-5 py-3 h-3/5 md:h-auto md:w-4/5 mx-auto">
       <p className="font-nunito text-yellow-text text-center md:text-start md:w-1/2">{work.toUpperCase()}</p>
-      <h1 className="font-poppins font-bold text-4xl md:text-5xl text-center md:text-start lg:text-6xl md:w-2/5">
+      <h1 className="font-playFaire font-bold text-4xl md:text-5xl text-center md:text-start lg:text-6xl md:w-2/5">
           Hello, my name is {name}
       </h1>
       <p className="font-nunito text-grey text-center md:text-2xl px-3 md:w-2/5 md:text-start md:px-0">

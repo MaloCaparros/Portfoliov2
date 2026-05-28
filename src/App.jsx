@@ -10,7 +10,7 @@ const navElements = [
 
 function App() {
   return (
-    <main>
+    <main className="bg-light-grey">
       <Header elements={navElements} />
       <Home />
       <ProductList />
