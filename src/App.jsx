@@ -1,7 +1,6 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Home from './components/Home';
-import ProductList from './components/ProductList';
-import Contact from './components/Contact';
+import HomePage from './pages/HomePage';
 
 const navElements = [
   { label: "About", path: "#about" },
@@ -11,12 +10,14 @@ const navElements = [
 
 function App() {
   return (
-    <main className="bg-light-grey">
-      <Header elements={navElements} />
-      <Home />
-      <ProductList />
-      <Contact />
-    </main>
+    <BrowserRouter>
+      <main className="bg-light-grey">
+        <Header elements={navElements} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 }
 
