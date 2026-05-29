@@ -1,5 +1,6 @@
 import Home from '../components/Home';
 import ProductList from '../components/ProductList';
+import Testimonials from '../components/Testimonials';
 import Contact from '../components/Contact';
 
 function HomePage() {
@@ -7,6 +8,7 @@ function HomePage() {
     <>
       <Home />
       <ProductList />
+      <Testimonials />
       <Contact />
     </>
   );
