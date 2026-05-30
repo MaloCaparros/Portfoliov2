@@ -46,7 +46,11 @@ function Header({ elements }) {
   return (
     <header className="fixed top-0 w-full z-50 ">
       <nav className="w-4/5 mx-auto h-14 flex items-center justify-between">
-        <Link to="/" className="font-comfortaa text-lg">Malo Caparros</Link>
+        <Link
+          to="/"
+          className="font-comfortaa text-lg"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >Malo Caparros</Link>
 
         <ul className="hidden md:flex gap-8 text-sm font-medium text-gray-600">
           {renderLinks("font-raleway text-lg")}
