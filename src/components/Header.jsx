@@ -1,25 +1,52 @@
 import { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 function Header({ elements }) {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleAnchorClick = (e, path) => {
+    e.preventDefault();
+    const hash = path.replace('/#', '');
+    setIsOpen(false);
+    if (location.pathname === '/') {
+      document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
 
   const renderLinks = (className) =>
     elements.map((element) => (
       <li key={element.label}>
-        <a
-          href={element.path}
-          className={className}
-          onClick={() => setIsOpen(false)}
-        >
-          {element.label}
-        </a>
+        {element.path.startsWith('/#') ? (
+          <a
+            href={element.path}
+            className={className}
+            onClick={(e) => handleAnchorClick(e, element.path)}
+          >
+            {element.label}
+          </a>
+        ) : (
+          <Link
+            to={element.path}
+            className={className}
+            onClick={() => setIsOpen(false)}
+          >
+            {element.label}
+          </Link>
+        )}
       </li>
     ));
 
   return (
     <header className="fixed top-0 w-full z-50 ">
       <nav className="w-4/5 mx-auto h-14 flex items-center justify-between">
-        <span className="font-comfortaa text-lg">Malo Caparros</span>
+        <Link to="/" className="font-comfortaa text-lg">Malo Caparros</Link>
 
         <ul className="hidden md:flex gap-8 text-sm font-medium text-gray-600">
           {renderLinks("font-raleway text-lg")}
