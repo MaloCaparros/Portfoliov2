@@ -5,7 +5,7 @@ import type { NavItem } from '../types';
 const navElements: NavItem[] = [
   { label: 'About', path: '/about' },
   { label: 'Projects', path: '/#projects' },
-  { label: 'Contacts', path: '/#contacts' },
+  { label: 'Contact', path: '/contact' },
 ];
 
 function PublicLayout() {

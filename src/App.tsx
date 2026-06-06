@@ -12,6 +12,7 @@ import PageLoader from './components/PageLoader';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const AdminProjectsPage = lazy(() => import('./pages/AdminProjectsPage'));
 const AdminContactsPage = lazy(() => import('./pages/AdminContactsPage'));
@@ -28,6 +29,7 @@ function App() {
                   <Route element={<PublicLayout />}>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/about" element={<AboutPage />} />
+                    <Route path="/contact" element={<ContactPage />} />
                   </Route>
 
                   <Route path="/login" element={<LoginPage />} />

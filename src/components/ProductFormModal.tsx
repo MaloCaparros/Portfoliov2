@@ -1,28 +1,31 @@
-import { useState } from 'react';
-import type { Project, ProjectFormData } from '../types';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { projectSchema, type ProjectFormValues } from '../types/schemas';
+import type { Project } from '../types';
 
 interface ProductFormModalProps {
   initial: Project | null;
-  onSubmit: (data: ProjectFormData) => void;
+  onSubmit: (data: ProjectFormValues) => void;
   onClose: () => void;
 }
 
+const inputClass = 'border border-gray-200 rounded-lg px-4 py-2.5 font-nunito focus:outline-none focus:ring-2 focus:ring-yellow';
+const errorClass = 'font-nunito text-xs text-red-500 mt-0.5';
+
 function ProductFormModal({ initial, onSubmit, onClose }: ProductFormModalProps) {
-  const [form, setForm] = useState<ProjectFormData>({
-    name: initial?.name ?? '',
-    link: initial?.link ?? '',
-    description: initial?.description ?? '',
-    image: initial?.image ?? '',
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ProjectFormValues>({
+    resolver: zodResolver(projectSchema),
+    defaultValues: {
+      name: initial?.name ?? '',
+      link: initial?.link ?? '',
+      description: initial?.description ?? '',
+      image: initial?.image ?? '',
+    },
   });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit(form);
-  };
 
   return (
     <div
@@ -39,48 +42,29 @@ function ProductFormModal({ initial, onSubmit, onClose }: ProductFormModalProps)
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <label className="font-nunito text-sm font-semibold">Nom</label>
-            <input
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              className="border border-gray-200 rounded-lg px-4 py-2.5 font-nunito focus:outline-none focus:ring-2 focus:ring-yellow"
-            />
+            <input {...register('name')} className={inputClass} />
+            {errors.name && <p className={errorClass}>{errors.name.message}</p>}
           </div>
+
           <div className="flex flex-col gap-1.5">
             <label className="font-nunito text-sm font-semibold">Lien</label>
-            <input
-              name="link"
-              value={form.link}
-              onChange={handleChange}
-              required
-              placeholder="https://..."
-              className="border border-gray-200 rounded-lg px-4 py-2.5 font-nunito focus:outline-none focus:ring-2 focus:ring-yellow"
-            />
+            <input {...register('link')} placeholder="https://..." className={inputClass} />
+            {errors.link && <p className={errorClass}>{errors.link.message}</p>}
           </div>
+
           <div className="flex flex-col gap-1.5">
             <label className="font-nunito text-sm font-semibold">Description</label>
-            <textarea
-              name="description"
-              value={form.description}
-              onChange={handleChange}
-              rows={3}
-              required
-              className="border border-gray-200 rounded-lg px-4 py-2.5 font-nunito resize-none focus:outline-none focus:ring-2 focus:ring-yellow"
-            />
+            <textarea {...register('description')} rows={3} className={`${inputClass} resize-none`} />
+            {errors.description && <p className={errorClass}>{errors.description.message}</p>}
           </div>
+
           <div className="flex flex-col gap-1.5">
-            <label className="font-nunito text-sm font-semibold">URL de l'image</label>
-            <input
-              name="image"
-              value={form.image}
-              onChange={handleChange}
-              placeholder="https://..."
-              className="border border-gray-200 rounded-lg px-4 py-2.5 font-nunito focus:outline-none focus:ring-2 focus:ring-yellow"
-            />
+            <label className="font-nunito text-sm font-semibold">URL de l'image <span className="text-grey font-normal">(optionnel)</span></label>
+            <input {...register('image')} placeholder="https://..." className={inputClass} />
+            {errors.image && <p className={errorClass}>{errors.image.message}</p>}
           </div>
 
           <div className="flex justify-end gap-3 pt-2">

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useProjectContext } from '../context/ProjectContext';
 import ProductFormModal from '../components/ProductFormModal';
-import type { Project, ProjectFormData } from '../types';
+import type { ProjectFormValues } from '../types/schemas';
+import type { Project } from '../types';
 
 type ModalMode = 'add' | 'edit' | null;
 
@@ -25,7 +26,7 @@ function AdminProjectsPage() {
     setEditTarget(null);
   };
 
-  const handleSubmit = (data: ProjectFormData) => {
+  const handleSubmit = (data: ProjectFormValues) => {
     if (modal === 'add') {
       addProject(data);
     } else if (editTarget) {
