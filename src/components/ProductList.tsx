@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import Product from './Product';
-import useProducts from '../hooks/useProducts';
+import { useProjectContext } from '../context/ProjectContext';
 
 function ProductList() {
-  const { products, loading } = useProducts();
+  const { projects, loading } = useProjectContext();
   const [search, setSearch] = useState('');
 
-  const filtered = products.filter((p) =>
+  const filtered = projects.filter((p) =>
     p.name.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -31,8 +31,8 @@ function ProductList() {
         ) : filtered.length === 0 ? (
           <p className="text-center font-nunito text-grey">Aucun projet trouvé.</p>
         ) : (
-          filtered.map((product, index) => (
-            <Product key={product.id} {...product} reversed={index % 2 !== 0} />
+          filtered.map((project, index) => (
+            <Product key={project.id} {...project} reversed={index % 2 !== 0} />
           ))
         )}
       </div>

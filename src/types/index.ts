@@ -20,3 +20,19 @@ export interface NavItem {
   label: string;
   path: string;
 }
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  picture?: string;
+}
+
+export interface ContactMessage {
+  id: number;
+  name: string;
+  email: string;
+  message: string;
+  createdAt: string;
+  read: boolean;
+}

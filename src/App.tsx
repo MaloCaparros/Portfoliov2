@@ -1,29 +1,45 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { AuthProvider } from './context/AuthContext';
+import { ProjectProvider } from './context/ProjectContext';
+import { ContactProvider } from './context/ContactContext';
+import { GOOGLE_CLIENT_ID } from './services/auth';
+import ProtectedRoute from './components/ProtectedRoute';
+import PublicLayout from './layouts/PublicLayout';
+import AdminLayout from './layouts/AdminLayout';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
-import DashboardPage from './pages/DashboardPage';
-import type { NavItem } from './types';
-
-const navElements: NavItem[] = [
-  { label: 'About', path: '/about' },
-  { label: 'Projects', path: '/#projects' },
-  { label: 'Contacts', path: '/#contacts' },
-  { label: 'Dashboard', path: '/dashboard' },
-];
+import LoginPage from './pages/LoginPage';
+import AdminProjectsPage from './pages/AdminProjectsPage';
+import AdminContactsPage from './pages/AdminContactsPage';
 
 function App() {
   return (
-    <BrowserRouter>
-      <main className="bg-light-grey">
-        <Header elements={navElements} />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-        </Routes>
-      </main>
-    </BrowserRouter>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <AuthProvider>
+        <ProjectProvider>
+          <ContactProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route element={<PublicLayout />}>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                </Route>
+
+                <Route path="/login" element={<LoginPage />} />
+
+                <Route element={<ProtectedRoute />}>
+                  <Route element={<AdminLayout />}>
+                    <Route path="/admin/projects" element={<AdminProjectsPage />} />
+                    <Route path="/admin/contacts" element={<AdminContactsPage />} />
+                  </Route>
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </ContactProvider>
+        </ProjectProvider>
+      </AuthProvider>
+    </GoogleOAuthProvider>
   );
 }
 

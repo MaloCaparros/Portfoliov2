@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import type { NavItem } from '../types';
 
 interface HeaderProps {
@@ -10,6 +11,7 @@ function Header({ elements }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { isAuthenticated } = useAuth();
 
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     e.preventDefault();
@@ -55,8 +57,16 @@ function Header({ elements }: HeaderProps) {
           Malo Caparros
         </Link>
 
-        <ul className="hidden md:flex gap-8 text-sm font-medium text-gray-600">
+        <ul className="hidden md:flex gap-8 text-sm font-medium text-gray-600 items-center">
           {renderLinks('font-raleway text-lg')}
+          <li>
+            <Link
+              to={isAuthenticated ? '/admin/projects' : '/login'}
+              className="font-raleway text-lg font-semibold px-4 py-1.5 rounded-lg bg-yellow hover:opacity-80 transition-opacity"
+            >
+              {isAuthenticated ? 'Admin' : 'Connexion'}
+            </Link>
+          </li>
         </ul>
 
         <button
@@ -71,6 +81,15 @@ function Header({ elements }: HeaderProps) {
 
       <ul className={`md:hidden fixed inset-0 flex flex-col items-center justify-center gap-10 bg-white font-raleway text-2xl font-medium text-gray-600 transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
         {renderLinks('font-raleway text-2xl')}
+        <li>
+          <Link
+            to={isAuthenticated ? '/admin/projects' : '/login'}
+            className="font-raleway text-2xl font-semibold px-6 py-2 rounded-lg bg-yellow hover:opacity-80 transition-opacity"
+            onClick={() => setIsOpen(false)}
+          >
+            {isAuthenticated ? 'Admin' : 'Connexion'}
+          </Link>
+        </li>
       </ul>
     </header>
   );
