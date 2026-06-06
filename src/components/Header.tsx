@@ -1,26 +1,31 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import type { NavItem } from '../types';
 
-function Header({ elements }) {
+interface HeaderProps {
+  elements: NavItem[];
+}
+
+function Header({ elements }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleAnchorClick = (e, path) => {
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     e.preventDefault();
     const hash = path.replace('/#', '');
     setIsOpen(false);
     if (location.pathname === '/') {
       document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
     } else {
-      navigate('/');
+      void navigate('/');
       setTimeout(() => {
         document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
   };
 
-  const renderLinks = (className) =>
+  const renderLinks = (className: string) =>
     elements.map((element) => (
       <li key={element.label}>
         {element.path.startsWith('/#') ? (
@@ -32,11 +37,7 @@ function Header({ elements }) {
             {element.label}
           </a>
         ) : (
-          <Link
-            to={element.path}
-            className={className}
-            onClick={() => setIsOpen(false)}
-          >
+          <Link to={element.path} className={className} onClick={() => setIsOpen(false)}>
             {element.label}
           </Link>
         )}
@@ -44,16 +45,18 @@ function Header({ elements }) {
     ));
 
   return (
-    <header className="fixed top-0 w-full z-50 ">
+    <header className="fixed top-0 w-full z-50">
       <nav className="w-4/5 mx-auto h-14 flex items-center justify-between">
         <Link
           to="/"
           className="font-comfortaa text-lg"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        >Malo Caparros</Link>
+        >
+          Malo Caparros
+        </Link>
 
         <ul className="hidden md:flex gap-8 text-sm font-medium text-gray-600">
-          {renderLinks("font-raleway text-lg")}
+          {renderLinks('font-raleway text-lg')}
         </ul>
 
         <button
@@ -67,7 +70,7 @@ function Header({ elements }) {
       </nav>
 
       <ul className={`md:hidden fixed inset-0 flex flex-col items-center justify-center gap-10 bg-white font-raleway text-2xl font-medium text-gray-600 transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
-        {renderLinks("font-raleway text-2xl")}
+        {renderLinks('font-raleway text-2xl')}
       </ul>
     </header>
   );

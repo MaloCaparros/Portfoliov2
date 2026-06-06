@@ -1,4 +1,6 @@
-const testimonials = [
+import type { Testimonial } from '../types';
+
+const testimonials: Testimonial[] = [
   {
     id: 1,
     name: 'Sophie Martin',
@@ -32,10 +34,7 @@ function Testimonials() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
         {testimonials.map((t) => (
-          <div
-            key={t.id}
-            className="flex flex-col gap-4 bg-light-grey rounded-2xl p-6 shadow-sm"
-          >
+          <div key={t.id} className="flex flex-col gap-4 bg-light-grey rounded-2xl p-6 shadow-sm">
             <span className="text-yellow text-4xl leading-none">"</span>
             <p className="font-nunito text-grey text-sm leading-relaxed flex-1">{t.text}</p>
             <div className="flex items-center gap-3 mt-2">

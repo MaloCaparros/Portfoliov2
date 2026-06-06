@@ -1,8 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
-const socialLinks = [
+interface SocialLink {
+  href: string;
+  label: string;
+  icon: IconDefinition;
+}
+
+const socialLinks: SocialLink[] = [
   { href: 'https://www.instagram.com/', label: 'Instagram', icon: faInstagram },
   { href: 'https://www.linkedin.com/in/malo-caparros-395029275/', label: 'LinkedIn', icon: faLinkedin },
   { href: 'mailto:malo.caparros@orange.com', label: 'Email', icon: faEnvelope },

@@ -1,18 +1,25 @@
 import { useState } from 'react';
+import type { Project, ProjectFormData } from '../types';
 
-function ProductFormModal({ initial, onSubmit, onClose }) {
-  const [form, setForm] = useState({
+interface ProductFormModalProps {
+  initial: Project | null;
+  onSubmit: (data: ProjectFormData) => void;
+  onClose: () => void;
+}
+
+function ProductFormModal({ initial, onSubmit, onClose }: ProductFormModalProps) {
+  const [form, setForm] = useState<ProjectFormData>({
     name: initial?.name ?? '',
     link: initial?.link ?? '',
     description: initial?.description ?? '',
     image: initial?.image ?? '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit(form);
   };
@@ -27,7 +34,9 @@ function ProductFormModal({ initial, onSubmit, onClose }) {
           <h2 className="font-playFaire font-bold text-2xl">
             {initial ? 'Modifier le projet' : 'Ajouter un projet'}
           </h2>
-          <button onClick={onClose} className="text-grey hover:text-dark text-3xl leading-none">&times;</button>
+          <button onClick={onClose} className="text-grey hover:text-dark text-3xl leading-none">
+            &times;
+          </button>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

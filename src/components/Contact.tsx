@@ -1,5 +1,5 @@
-import Button from './Button.jsx';
-import Footer from './Footer.jsx';
+import Button from './Button';
+import Footer from './Footer';
 
 function Contact() {
   return (

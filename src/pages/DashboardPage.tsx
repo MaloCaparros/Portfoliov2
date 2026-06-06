@@ -1,18 +1,21 @@
 import { useState } from 'react';
 import useProducts from '../hooks/useProducts';
 import ProductFormModal from '../components/ProductFormModal';
+import type { Project, ProjectFormData } from '../types';
+
+type ModalMode = 'add' | 'edit' | null;
 
 function DashboardPage() {
   const { products, loading, addProduct, updateProduct, deleteProduct } = useProducts();
-  const [modal, setModal] = useState(null);
-  const [editTarget, setEditTarget] = useState(null);
+  const [modal, setModal] = useState<ModalMode>(null);
+  const [editTarget, setEditTarget] = useState<Project | null>(null);
 
   const openAdd = () => {
     setEditTarget(null);
     setModal('add');
   };
 
-  const openEdit = (product) => {
+  const openEdit = (product: Project) => {
     setEditTarget(product);
     setModal('edit');
   };
@@ -22,16 +25,16 @@ function DashboardPage() {
     setEditTarget(null);
   };
 
-  const handleSubmit = (data) => {
+  const handleSubmit = (data: ProjectFormData) => {
     if (modal === 'add') {
       addProduct(data);
-    } else {
+    } else if (editTarget) {
       updateProduct(editTarget.id, data);
     }
     closeModal();
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     if (window.confirm('Supprimer ce projet ?')) {
       deleteProduct(id);
     }
@@ -58,8 +61,12 @@ function DashboardPage() {
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   <th className="text-left font-nunito font-semibold text-sm px-6 py-4">Nom</th>
-                  <th className="text-left font-nunito font-semibold text-sm px-6 py-4 hidden md:table-cell">Description</th>
-                  <th className="text-left font-nunito font-semibold text-sm px-6 py-4 hidden md:table-cell">Lien</th>
+                  <th className="text-left font-nunito font-semibold text-sm px-6 py-4 hidden md:table-cell">
+                    Description
+                  </th>
+                  <th className="text-left font-nunito font-semibold text-sm px-6 py-4 hidden md:table-cell">
+                    Lien
+                  </th>
                   <th className="text-right font-nunito font-semibold text-sm px-6 py-4">Actions</th>
                 </tr>
               </thead>
@@ -113,11 +120,7 @@ function DashboardPage() {
       </div>
 
       {modal && (
-        <ProductFormModal
-          initial={editTarget}
-          onSubmit={handleSubmit}
-          onClose={closeModal}
-        />
+        <ProductFormModal initial={editTarget} onSubmit={handleSubmit} onClose={closeModal} />
       )}
     </div>
   );
