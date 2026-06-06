@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from './context/AuthContext';
@@ -7,11 +8,13 @@ import { GOOGLE_CLIENT_ID } from './services/auth';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import LoginPage from './pages/LoginPage';
-import AdminProjectsPage from './pages/AdminProjectsPage';
-import AdminContactsPage from './pages/AdminContactsPage';
+import PageLoader from './components/PageLoader';
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const AdminProjectsPage = lazy(() => import('./pages/AdminProjectsPage'));
+const AdminContactsPage = lazy(() => import('./pages/AdminContactsPage'));
 
 function App() {
   return (
@@ -20,21 +23,23 @@ function App() {
         <ProjectProvider>
           <ContactProvider>
             <BrowserRouter>
-              <Routes>
-                <Route element={<PublicLayout />}>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/about" element={<AboutPage />} />
-                </Route>
-
-                <Route path="/login" element={<LoginPage />} />
-
-                <Route element={<ProtectedRoute />}>
-                  <Route element={<AdminLayout />}>
-                    <Route path="/admin/projects" element={<AdminProjectsPage />} />
-                    <Route path="/admin/contacts" element={<AdminContactsPage />} />
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
+                  <Route element={<PublicLayout />}>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/about" element={<AboutPage />} />
                   </Route>
-                </Route>
-              </Routes>
+
+                  <Route path="/login" element={<LoginPage />} />
+
+                  <Route element={<ProtectedRoute />}>
+                    <Route element={<AdminLayout />}>
+                      <Route path="/admin/projects" element={<AdminProjectsPage />} />
+                      <Route path="/admin/contacts" element={<AdminContactsPage />} />
+                    </Route>
+                  </Route>
+                </Routes>
+              </Suspense>
             </BrowserRouter>
           </ContactProvider>
         </ProjectProvider>

@@ -62,7 +62,7 @@ function Header({ elements }: HeaderProps) {
           <li>
             <Link
               to={isAuthenticated ? '/admin/projects' : '/login'}
-              className="font-raleway text-lg font-semibold px-4 py-1.5 rounded-lg bg-yellow hover:opacity-80 transition-opacity"
+              className="font-raleway text-lg"
             >
               {isAuthenticated ? 'Admin' : 'Connexion'}
             </Link>
@@ -84,7 +84,7 @@ function Header({ elements }: HeaderProps) {
         <li>
           <Link
             to={isAuthenticated ? '/admin/projects' : '/login'}
-            className="font-raleway text-2xl font-semibold px-6 py-2 rounded-lg bg-yellow hover:opacity-80 transition-opacity"
+            className="font-raleway text-2xl"
             onClick={() => setIsOpen(false)}
           >
             {isAuthenticated ? 'Admin' : 'Connexion'}
