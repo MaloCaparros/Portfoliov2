@@ -12,7 +12,13 @@ export const projectSchema = z.object({
   name: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
   link: z.string().url("L'URL du projet est invalide"),
   description: z.string().min(10, 'La description doit contenir au moins 10 caractères'),
-  image: z.union([z.string().url("L'URL de l'image est invalide"), z.literal('')]),
+  image: z.string().refine(
+    (val) => {
+      if (val === '' || val.startsWith('data:image/') || val.startsWith('/')) return true;
+      try { new URL(val); return true; } catch { return false; }
+    },
+    { message: "L'URL de l'image est invalide" }
+  ),
 });
 
 export type ProjectFormValues = z.infer<typeof projectSchema>;
