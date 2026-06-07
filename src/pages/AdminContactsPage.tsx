@@ -13,6 +13,7 @@ function AdminContactsPage() {
         ) : messages.length === 0 ? (
           <p className="font-nunito text-grey text-center py-10">Aucun message reçu.</p>
         ) : (
+          <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
@@ -46,6 +47,7 @@ function AdminContactsPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
     </div>

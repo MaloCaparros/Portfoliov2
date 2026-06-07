@@ -17,15 +17,47 @@ function AdminLayout() {
       isActive ? 'bg-yellow text-dark' : 'text-grey hover:bg-gray-100'
     }`;
 
+  const UserAvatar = () =>
+    user?.picture ? (
+      <img src={user.picture} alt={user.name} className="w-8 h-8 rounded-full shrink-0" />
+    ) : user ? (
+      <div className="w-8 h-8 rounded-full bg-yellow flex items-center justify-center shrink-0">
+        <span className="font-nunito font-bold text-sm">{user.name[0]}</span>
+      </div>
+    ) : null;
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      <aside className="w-full md:w-56 bg-white border-b md:border-b-0 md:border-r border-gray-200 flex md:flex-col p-4 gap-2 shrink-0">
-        <p className="font-comfortaa font-bold text-lg hidden md:block mb-4 px-2">Admin</p>
 
-        <nav className="flex md:flex-col gap-2 flex-1">
-          <NavLink to="/admin/projects" className={linkClass}>
-            Projets
+      {/* Barre mobile */}
+      <div className="md:hidden bg-white border-b border-gray-200 flex items-center px-3 py-2 gap-2">
+        <nav className="flex gap-2 flex-1">
+          <NavLink to="/admin/projects" className={linkClass}>Projets</NavLink>
+          <NavLink to="/admin/contacts" className={linkClass}>
+            Messages
+            {unreadCount > 0 && (
+              <span className="ml-1 bg-yellow text-dark text-xs font-bold px-1.5 py-0.5 rounded-full">
+                {unreadCount}
+              </span>
+            )}
           </NavLink>
+        </nav>
+
+        <UserAvatar />
+        <button
+          onClick={handleLogout}
+          className="px-3 py-2 rounded-lg font-nunito text-sm text-grey hover:bg-gray-100 transition-colors shrink-0"
+        >
+          Sortir
+        </button>
+      </div>
+
+      {/* Sidebar desktop */}
+      <aside className="hidden md:flex md:w-56 bg-white border-r border-gray-200 flex-col p-4 gap-2 shrink-0">
+        <p className="font-comfortaa font-bold text-lg mb-4 px-2">Admin</p>
+
+        <nav className="flex flex-col gap-2 flex-1">
+          <NavLink to="/admin/projects" className={linkClass}>Projets</NavLink>
           <NavLink to="/admin/contacts" className={linkClass}>
             Messages
             {unreadCount > 0 && (
@@ -36,16 +68,10 @@ function AdminLayout() {
           </NavLink>
         </nav>
 
-        <div className="hidden md:flex flex-col gap-2 mt-auto pt-4 border-t border-gray-100">
+        <div className="flex flex-col gap-2 pt-4 border-t border-gray-100">
           {user && (
             <div className="flex items-center gap-2 px-2">
-              {user.picture ? (
-                <img src={user.picture} alt={user.name} className="w-8 h-8 rounded-full" />
-              ) : (
-                <div className="w-8 h-8 rounded-full bg-yellow flex items-center justify-center">
-                  <span className="font-nunito font-bold text-sm">{user.name[0]}</span>
-                </div>
-              )}
+              <UserAvatar />
               <span className="font-nunito text-sm text-dark truncate">{user.name}</span>
             </div>
           )}
@@ -58,7 +84,7 @@ function AdminLayout() {
         </div>
       </aside>
 
-      <main className="flex-1 p-6 bg-light-grey">
+      <main className="flex-1 p-4 md:p-6 bg-light-grey min-w-0">
         <Outlet />
       </main>
     </div>

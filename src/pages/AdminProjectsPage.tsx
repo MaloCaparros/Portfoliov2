@@ -57,6 +57,7 @@ function AdminProjectsPage() {
         {loading ? (
           <p className="font-nunito text-grey text-center py-10">Chargement...</p>
         ) : (
+          <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
@@ -95,7 +96,7 @@ function AdminProjectsPage() {
                       </a>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex gap-2 justify-end">
+                      <div className="flex flex-col sm:flex-row gap-2 justify-end">
                         <button
                           onClick={() => openEdit(p)}
                           className="font-nunito text-sm px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors"
@@ -115,6 +116,7 @@ function AdminProjectsPage() {
               )}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 

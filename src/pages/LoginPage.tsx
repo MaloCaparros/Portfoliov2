@@ -10,7 +10,7 @@ function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-light-grey px-6">
+    <div className="min-h-screen flex items-center justify-center px-6 pt-14">
       <div className="bg-white rounded-2xl shadow-md p-10 flex flex-col items-center gap-8 w-full max-w-sm">
         <div className="flex flex-col items-center gap-2">
           <h1 className="font-comfortaa font-bold text-2xl">Malo Caparros</h1>
