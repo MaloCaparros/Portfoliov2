@@ -9,9 +9,9 @@ export const contactSchema = z.object({
 export type ContactFormData = z.infer<typeof contactSchema>;
 
 export const projectSchema = z.object({
-  name: z.string().min(2, 'Le nom est requis'),
+  name: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
   link: z.string().url("L'URL du projet est invalide"),
-  description: z.string().min(10, 'La description est requise'),
+  description: z.string().min(10, 'La description doit contenir au moins 10 caractères'),
   image: z.union([z.string().url("L'URL de l'image est invalide"), z.literal('')]),
 });
 

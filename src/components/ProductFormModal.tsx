@@ -9,7 +9,10 @@ interface ProductFormModalProps {
   onClose: () => void;
 }
 
-const inputClass = 'border border-gray-200 rounded-lg px-4 py-2.5 font-nunito focus:outline-none focus:ring-2 focus:ring-yellow';
+const inputClass = (hasError: boolean) =>
+  `border rounded-lg px-4 py-2.5 font-nunito focus:outline-none focus:ring-2 focus:ring-yellow w-full ${
+    hasError ? 'border-red-400' : 'border-gray-200'
+  }`;
 const errorClass = 'font-nunito text-xs text-red-500 mt-0.5';
 
 function ProductFormModal({ initial, onSubmit, onClose }: ProductFormModalProps) {
@@ -45,25 +48,25 @@ function ProductFormModal({ initial, onSubmit, onClose }: ProductFormModalProps)
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <label className="font-nunito text-sm font-semibold">Nom</label>
-            <input {...register('name')} className={inputClass} />
+            <input {...register('name')} className={inputClass(!!errors.name)} />
             {errors.name && <p className={errorClass}>{errors.name.message}</p>}
           </div>
 
           <div className="flex flex-col gap-1.5">
             <label className="font-nunito text-sm font-semibold">Lien</label>
-            <input {...register('link')} placeholder="https://..." className={inputClass} />
+            <input {...register('link')} placeholder="https://..." className={inputClass(!!errors.link)} />
             {errors.link && <p className={errorClass}>{errors.link.message}</p>}
           </div>
 
           <div className="flex flex-col gap-1.5">
             <label className="font-nunito text-sm font-semibold">Description</label>
-            <textarea {...register('description')} rows={3} className={`${inputClass} resize-none`} />
+            <textarea {...register('description')} rows={3} className={`${inputClass(!!errors.description)} resize-none`} />
             {errors.description && <p className={errorClass}>{errors.description.message}</p>}
           </div>
 
           <div className="flex flex-col gap-1.5">
             <label className="font-nunito text-sm font-semibold">URL de l'image <span className="text-grey font-normal">(optionnel)</span></label>
-            <input {...register('image')} placeholder="https://..." className={inputClass} />
+            <input {...register('image')} placeholder="https://..." className={inputClass(!!errors.image)} />
             {errors.image && <p className={errorClass}>{errors.image.message}</p>}
           </div>
 

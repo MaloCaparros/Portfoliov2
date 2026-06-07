@@ -5,8 +5,10 @@ import { contactSchema, type ContactFormData } from '../types/schemas';
 import { useContactContext } from '../context/ContactContext';
 import Footer from '../components/Footer';
 
-const inputClass =
-  'border border-gray-200 rounded-lg px-4 py-2.5 font-nunito bg-white focus:outline-none focus:ring-2 focus:ring-yellow w-full';
+const inputClass = (hasError: boolean) =>
+  `border rounded-lg px-4 py-2.5 font-nunito bg-white focus:outline-none focus:ring-2 focus:ring-yellow w-full ${
+    hasError ? 'border-red-400' : 'border-gray-200'
+  }`;
 const errorClass = 'font-nunito text-xs text-red-500 mt-0.5';
 
 function ContactPage() {
@@ -57,13 +59,13 @@ function ContactPage() {
         >
           <div className="flex flex-col gap-1.5">
             <label className="font-nunito text-sm font-semibold">Nom</label>
-            <input type="text" {...register('name')} className={inputClass} />
+            <input type="text" {...register('name')} className={inputClass(!!errors.name)} />
             {errors.name && <p className={errorClass}>{errors.name.message}</p>}
           </div>
 
           <div className="flex flex-col gap-1.5">
             <label className="font-nunito text-sm font-semibold">Email</label>
-            <input type="email" {...register('email')} className={inputClass} />
+            <input type="email" {...register('email')} className={inputClass(!!errors.email)} />
             {errors.email && <p className={errorClass}>{errors.email.message}</p>}
           </div>
 
@@ -72,7 +74,7 @@ function ContactPage() {
             <textarea
               rows={5}
               {...register('message')}
-              className={`${inputClass} resize-none`}
+              className={`${inputClass(!!errors.message)} resize-none`}
             />
             {errors.message && <p className={errorClass}>{errors.message.message}</p>}
           </div>
