@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# Portfolio — Malo Caparros
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Application web portfolio développée dans le cadre du challenge Front-End EFREI 2026.
 
-## Available Scripts
+## Stack technique
 
-In the project directory, you can run:
+| Outil | Version | Rôle |
+|---|---|---|
+| React | 19 | UI |
+| TypeScript | 6 | Typage strict |
+| Tailwind CSS | 4 | Design system |
+| React Router | 7 | Routing & code splitting |
+| Zod | 4 | Validation des schémas |
+| React Hook Form | 7 | Gestion des formulaires |
+| Google OAuth | — | Authentification |
+| Vite | 8 | Build tool |
 
-### `npm start`
+## Architecture
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+src/
+├── components/     # Composants UI réutilisables
+├── context/        # États globaux (useReducer + useContext)
+├── hooks/          # Custom hooks (useAuth, useProjectContext…)
+├── layouts/        # Structures de page (PublicLayout, AdminLayout)
+├── pages/          # Vues routées (lazy-loaded)
+├── services/       # Configuration Google OAuth
+├── types/          # Interfaces & schémas Zod
+└── data/           # Données initiales
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Routes
 
-### `npm test`
+### Publiques
+| Route | Page |
+|---|---|
+| `/` | Accueil |
+| `/about` | À propos |
+| `/contact` | Formulaire de contact |
+| `/project/:id` | Détail d'un projet |
+| `/login` | Connexion Google |
+| `*` | 404 |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Protégées (Google OAuth requis)
+| Route | Page |
+|---|---|
+| `/admin/projects` | CRUD projets |
+| `/admin/contacts` | Messages reçus |
+| `/admin/testimonials` | Gestion des témoignages |
 
-### `npm run build`
+## Fonctionnalités
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Authentification** — Google OAuth 2.0, routes protégées, persistance localStorage
+- **Projets** — CRUD complet, upload d'images (base64), recherche
+- **Contact** — Formulaire validé Zod, messages consultables en admin
+- **Témoignages** — CRUD + toggle visibilité depuis l'admin
+- **UX** — Skeleton loaders, transitions de page, modales de confirmation, états vides illustrés
+- **Responsive** — Mobile first, sidebar admin adaptée
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Lancer le projet
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm install
+```
 
-### `npm run eject`
+Créer un fichier `.env.local` à la racine :
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```env
+VITE_GOOGLE_CLIENT_ID=ton_client_id_google
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Build
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm run build
+```
