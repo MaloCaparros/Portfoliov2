@@ -78,3 +78,8 @@ npm start
 ```bash
 npm run build
 ```
+
+## Contributeurs
+
+- [Malo Caparros](https://github.com/MaloCaparros)
+- [Elouan le Merle](https://github.com/FiFolker)

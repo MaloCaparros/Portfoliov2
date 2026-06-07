@@ -3,6 +3,10 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
+  "contributors": [
+    { "name": "Malo Caparros" },
+    { "name": "Elouan le Merle" }
+  ],
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/free-brands-svg-icons": "^7.2.0",
