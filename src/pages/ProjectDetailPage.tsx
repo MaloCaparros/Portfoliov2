@@ -1,5 +1,5 @@
 import { useParams, Navigate } from 'react-router-dom';
-import { useProjectContext } from '../context/ProjectContext';
+import { useProjectContext } from '../hooks/useProjectContext';
 import Footer from '../components/Footer';
 
 function ProjectDetailPage() {

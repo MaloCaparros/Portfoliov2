@@ -6,7 +6,6 @@ export interface Project {
   image: string;
 }
 
-export type ProjectFormData = Omit<Project, 'id'>;
 
 export interface Testimonial {
   id: number;

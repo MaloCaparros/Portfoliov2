@@ -1,5 +1,6 @@
-import { createContext, useContext, useReducer, useEffect } from 'react';
-import type { Project, ProjectFormData } from '../types';
+import { createContext, useReducer, useEffect } from 'react';
+import type { Project } from '../types';
+import type { ProjectFormValues } from '../types/schemas';
 import productsData from '../data/products';
 
 interface ProjectState {
@@ -29,13 +30,13 @@ function projectReducer(state: ProjectState, action: ProjectAction): ProjectStat
   }
 }
 
-interface ProjectContextValue extends ProjectState {
-  addProject: (data: ProjectFormData) => void;
-  updateProject: (id: number, data: ProjectFormData) => void;
+export interface ProjectContextValue extends ProjectState {
+  addProject: (data: ProjectFormValues) => void;
+  updateProject: (id: number, data: ProjectFormValues) => void;
   deleteProject: (id: number) => void;
 }
 
-const ProjectContext = createContext<ProjectContextValue | null>(null);
+export const ProjectContext = createContext<ProjectContextValue | null>(null);
 
 const STORAGE_KEY = 'portfolio_products';
 
@@ -56,11 +57,11 @@ export function ProjectProvider({ children }: { children: React.ReactNode }) {
     }
   }, [state.projects, state.loading]);
 
-  const addProject = (data: ProjectFormData) => {
+  const addProject = (data: ProjectFormValues) => {
     dispatch({ type: 'ADD_PROJECT', payload: { ...data, id: Date.now() } });
   };
 
-  const updateProject = (id: number, data: ProjectFormData) => {
+  const updateProject = (id: number, data: ProjectFormValues) => {
     dispatch({ type: 'UPDATE_PROJECT', payload: { ...data, id } });
   };
 
@@ -73,10 +74,4 @@ export function ProjectProvider({ children }: { children: React.ReactNode }) {
       {children}
     </ProjectContext.Provider>
   );
-}
-
-export function useProjectContext(): ProjectContextValue {
-  const ctx = useContext(ProjectContext);
-  if (!ctx) throw new Error('useProjectContext must be used within ProjectProvider');
-  return ctx;
 }

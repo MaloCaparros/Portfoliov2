@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { contactSchema, type ContactFormData } from '../types/schemas';
-import { useContactContext } from '../context/ContactContext';
+import { useContactContext } from '../hooks/useContactContext';
 import Footer from '../components/Footer';
 
 const inputClass = (hasError: boolean) =>

@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { useContactContext } from '../context/ContactContext';
+import { useAuth } from '../hooks/useAuth';
+import { useContactContext } from '../hooks/useContactContext';
 
 function AdminLayout() {
   const { user, logout } = useAuth();

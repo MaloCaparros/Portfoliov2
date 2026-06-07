@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useReducer, useEffect } from 'react';
 import type { ContactMessage } from '../types';
 
 interface ContactState {
@@ -27,13 +27,13 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
   }
 }
 
-interface ContactContextValue extends ContactState {
+export interface ContactContextValue extends ContactState {
   addMessage: (name: string, email: string, message: string) => void;
   markRead: (id: number) => void;
   unreadCount: number;
 }
 
-const ContactContext = createContext<ContactContextValue | null>(null);
+export const ContactContext = createContext<ContactContextValue | null>(null);
 
 const STORAGE_KEY = 'portfolio_messages';
 
@@ -79,10 +79,4 @@ export function ContactProvider({ children }: { children: React.ReactNode }) {
       {children}
     </ContactContext.Provider>
   );
-}
-
-export function useContactContext(): ContactContextValue {
-  const ctx = useContext(ContactContext);
-  if (!ctx) throw new Error('useContactContext must be used within ContactProvider');
-  return ctx;
 }

@@ -1,9 +1,11 @@
 function PageLoader() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-light-grey">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-10 h-10 rounded-full border-4 border-yellow border-t-transparent animate-spin" />
-        <p className="font-nunito text-grey text-sm">Chargement...</p>
+    <div className="min-h-screen bg-light-grey px-10 pt-28 animate-pulse">
+      <div className="h-9 bg-gray-200 rounded-lg w-56 mb-10" />
+      <div className="flex flex-col gap-3 max-w-lg">
+        <div className="h-4 bg-gray-200 rounded w-full" />
+        <div className="h-4 bg-gray-200 rounded w-5/6" />
+        <div className="h-4 bg-gray-200 rounded w-4/5" />
       </div>
     </div>
   );

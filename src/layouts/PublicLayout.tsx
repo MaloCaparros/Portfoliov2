@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import type { NavItem } from '../types';
 
@@ -9,10 +9,14 @@ const navElements: NavItem[] = [
 ];
 
 function PublicLayout() {
+  const location = useLocation();
+
   return (
     <main className="bg-light-grey">
       <Header elements={navElements} />
-      <Outlet />
+      <div key={location.pathname} className="animate-page-in">
+        <Outlet />
+      </div>
     </main>
   );
 }
