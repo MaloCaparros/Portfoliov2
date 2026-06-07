@@ -16,6 +16,8 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const AdminProjectsPage = lazy(() => import('./pages/AdminProjectsPage'));
 const AdminContactsPage = lazy(() => import('./pages/AdminContactsPage'));
+const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/project/:id" element={<ProjectDetailPage />} />
                   </Route>
 
                   <Route element={<ProtectedRoute />}>
@@ -39,6 +42,7 @@ function App() {
                       <Route path="/admin/contacts" element={<AdminContactsPage />} />
                     </Route>
                   </Route>
+                  <Route path="*" element={<NotFoundPage />} />
                 </Routes>
               </Suspense>
             </BrowserRouter>
