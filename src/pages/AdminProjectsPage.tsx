@@ -116,7 +116,7 @@ function AdminProjectsPage() {
                         </button>
                         <button
                           onClick={() => setDeleteTargetId(p.id)}
-                          className="font-nunito text-sm px-3 py-1.5 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 transition-colors"
+                          className="font-nunito text-sm px-3 py-1.5 rounded-lg bg-red-500 text-white hover:bg-red-100 hover:text-black transition-colors"
                         >
                           Supprimer
                         </button>
