@@ -22,3 +22,11 @@ export const projectSchema = z.object({
 });
 
 export type ProjectFormValues = z.infer<typeof projectSchema>;
+
+export const testimonialSchema = z.object({
+  name: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
+  role: z.string().min(2, 'Le rôle doit contenir au moins 2 caractères'),
+  text: z.string().min(20, 'Le témoignage doit contenir au moins 20 caractères'),
+});
+
+export type TestimonialFormValues = z.infer<typeof testimonialSchema>;

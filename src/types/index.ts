@@ -13,6 +13,7 @@ export interface Testimonial {
   role: string;
   text: string;
   initials: string;
+  visible: boolean;
 }
 
 export interface NavItem {

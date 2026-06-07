@@ -1,10 +1,13 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useContactContext } from '../hooks/useContactContext';
+import { useTestimonialsContext } from '../hooks/useTestimonialsContext';
 
 function AdminLayout() {
   const { user, logout } = useAuth();
   const { unreadCount } = useContactContext();
+  const { testimonials } = useTestimonialsContext();
+  const hiddenCount = testimonials.filter((t) => !t.visible).length;
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -41,6 +44,14 @@ function AdminLayout() {
               </span>
             )}
           </NavLink>
+          <NavLink to="/admin/testimonials" className={linkClass}>
+            Avis
+            {hiddenCount > 0 && (
+              <span className="ml-1 bg-gray-200 text-dark text-xs font-bold px-1.5 py-0.5 rounded-full">
+                {hiddenCount}
+              </span>
+            )}
+          </NavLink>
         </nav>
 
         <UserAvatar />
@@ -63,6 +74,14 @@ function AdminLayout() {
             {unreadCount > 0 && (
               <span className="ml-auto bg-yellow text-dark text-xs font-bold px-2 py-0.5 rounded-full">
                 {unreadCount}
+              </span>
+            )}
+          </NavLink>
+          <NavLink to="/admin/testimonials" className={linkClass}>
+            Témoignages
+            {hiddenCount > 0 && (
+              <span className="ml-auto bg-gray-200 text-dark text-xs font-bold px-2 py-0.5 rounded-full">
+                {hiddenCount}
               </span>
             )}
           </NavLink>
